@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//android.widget.ImageView[@resource-id=\"uk.co.uktv.dave:id/splash_logo\"]"
+}
