@@ -1,10 +1,29 @@
-import { expect } from '@wdio/globals'
-import UKTVScreen from '../pageobjects/uktv-screen.js'
+import { expect } from '@wdio/globals';
+
+let platform = process.env.PLATFORM;
+console.log(platform);
+
+let UKTVScreen;
+
+before(async () => {
+    if (platform === "android") {
+        UKTVScreen = await import('../screenObjects/android/uktv-screen.js').then(module => module.default);
+    } else if (platform === "ios") {
+        UKTVScreen = await import('../screenObjects/ios/uktv-screen.js');
+    } else {
+        throw new Error('Unsupported platform');
+    }
+    console.log("BAKR",UKTVScreen);
+
+});
+
+
 
 describe('Demo Application', () => {
 
     it("Sample Test", async () => {
-        await expect(UKTVScreen.ukTvLogo).toBeDisplayed();
+        await UKTVScreen.ukTvLogo.waitForDisplayed({ timeout: 10000 }); // Wait up to 10 seconds
+        await expect(UKTVScreen.ukTvLogo).toBeDisplayed();        
         await UKTVScreen.acceptAllCookies.click();
         await UKTVScreen.signInButton.click();
         await driver.pause(2000);
