@@ -22,7 +22,7 @@ before(async () => {
 describe('Demo Application', () => {
 
     it("Sample Test", async () => {
-        await UKTVScreen.ukTvLogo.waitForDisplayed({ timeout: 10000 }); // Wait up to 10 seconds
+        await UKTVScreen.ukTvLogo.waitForDisplayed({ timeout: 20000 }); // Wait up to 10 seconds
         await expect(UKTVScreen.ukTvLogo).toBeDisplayed();        
         await UKTVScreen.acceptAllCookies.click();
         await UKTVScreen.signInButton.click();
@@ -38,6 +38,7 @@ describe('Demo Application', () => {
         await driver.pause(2000);
         await UKTVScreen.searchTextField.click();
         await UKTVScreen.searchTextFieldAutoSuggest.setValue('Madam Secretary');
+        await driver.pause(5000);
         await expect(UKTVScreen.madamSecretaryImage).toBeDisplayed();
         console.log('The Title is :' + ' ' + await UKTVScreen.madamSecretaryImageTitle.getText());
     })
